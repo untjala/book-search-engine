@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "graphql": "^16.5.0"
+    "graphql": "^16.5.0",
+    "react-loader-spinner": "^5.1.7-beta.1"
   }
 }
