@@ -6,7 +6,8 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        const userData = await User.findOne({ _id: context.user._id });
+        return userData;
       }
       throw new AuthenticationError('Please log in!');
     }
@@ -29,33 +30,34 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, { authors, description, bookId, image, link, title }, context) => {
+    saveBook: async (parent, { bookData }, context) => {
       if (context.user) {
-        const user = await User.findOneAndUpdate({ _id: context.user._id }, { $addToSet: {
-            savedBooks: {
-                authors: authors,
-                description: description,
-                bookId: bookId,
-                image: image,
-                link: link,
-                title: title
-            }
-        }});
-        return user;;
-    }
-    throw new AuthenticationError('Please login to view this content!');
-  },
-    removeBook: async (parent, { bookId }, context) => {
-      if (context.user) {
-        const user = await User.findOneAndUpdate(
-            { _id: context.user._id },
-            { $pull: {savedBooks: {bookId: bookId} } }
+        const updatedUser = await User.findByIdAndUpdate(
+          {_id: context.user._id },
+          { $addToSet: { savedBooks: bookData } },
+          { new: true },
         );
-      return User;
+
+        return updatedUser;
+
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+      removeBook: async (parent, { bookId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          {_id: context.user._id },
+          { $pull: { savedBooks: { bookId: bookId } } },
+          { new: true },
+        );
+
+        return updatedUser;
+
+      }
+      throw new AuthenticationError('Unable to delete book!');
     }
-    throw new AuthenticationError('Please login to view this content!');
-  }
-}
+  },
 };
 
 module.exports = resolvers;
