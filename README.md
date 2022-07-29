@@ -7,7 +7,7 @@ For this challenge, my goal was to refactor an application from RESTful routes t
 
 ## Resources 
  * [Repository](https://github.com/untjala/book-search-engine)
- * [Heroku](https://untjala.github.io/react-portfolio/)
+ * [Heroku](https://immense-temple-91423.herokuapp.com/)
 
 ## Contact
 Questions? Ideas? Contributions? Feel free to reach out or check out some of my other projects! **https://github.com/untjala**
