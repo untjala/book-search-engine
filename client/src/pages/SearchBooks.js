@@ -5,7 +5,7 @@ import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 
 const SearchBooks = () => {
@@ -69,7 +69,9 @@ const SearchBooks = () => {
     }
 
     try {
-      await saveBook({ variables: { bookData: { ...bookToSave }}});
+       await saveBook({
+        variables: { bookData : bookToSave }
+      });
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
