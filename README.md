@@ -1,6 +1,6 @@
 # Book Search Engine
 ### Description
-For this challenge, my goal was to refactor an application from RESTful routes to Apollo. The application has been refactored on the client and server sides to use React.js, Mongoose, and GraphQL.
+For this challenge, my goal was to refactor a book search application from RESTful routes to Apollo. The application has been refactored on the client and server sides to use React.js, Mongoose, and GraphQL.
 
 ## Visuals 
 ![Site](public/Google-Book-Search.png)
